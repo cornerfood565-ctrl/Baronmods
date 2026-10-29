@@ -87,3 +87,9 @@ create policy "Admins delete mod files" on storage.objects for delete to authent
 
 -- Public buckets serve downloads, but RLS limits writes to approved admins.
 -- Never put a service_role/secret key in browser JavaScript.
+
+
+-- Explicit API privileges; RLS policies above still decide which rows/actions are allowed.
+grant select on public.mods, public.mod_versions to anon, authenticated;
+grant insert, update, delete on public.mods, public.mod_versions to authenticated;
+grant select on public.admin_users to authenticated;
